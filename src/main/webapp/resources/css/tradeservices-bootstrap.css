@@ -1,0 +1,101 @@
+.modal-vertical-centered {
+	transform: translate(0, 50%) !important;
+	-ms-transform: translate(0, 50%) !important; /* IE 9 */
+	-webkit-transform: translate(0, 50%) !important; /* Safari and Chrome */
+}
+
+/* CITI GLOBAL HEADER STYLES */	
+.citi-header {
+	margin-left: -1px; 
+	margin-right: -1px; 
+	text-transform: uppercase; 
+	font-size:11px; 
+	font-family: Arial, sans-serif
+}
+
+.citi-header-top-bar {
+	background-color:black; 
+	background: #000;	
+	background-image: url('../img/Header_Span.gif'); 
+	background-position: 0 0px;
+}
+
+.citi-header-top-bar a {
+	color: white;
+}
+
+.citi-header-inner { 
+	min-height: 22px; 
+	height: 22px;
+}
+
+.citi-header-title-bar {
+	background: #00bdf2;
+	background-image: url('../img/Header_Span.gif');
+	background-position: 0 -22px;
+	min-height: 33px; 
+	height: 33px;	
+}
+
+.citi-footer {
+	margin-left: -1px; 
+	margin-right: -1px;
+	margin-top:  15px;
+	text-transform: uppercase; 
+	font-size:11px; 
+	font-family: Arial, sans-serif;
+	border-bottom: 2px solid #D0D0D0;
+}
+
+.citi-footer a {
+	color: black;
+}
+
+.citi-footer-smfont {
+	font-size: 11px;
+	text-transform: none;
+	color: #53565A;
+}
+
+.global-search > div {
+  margin-left: 10px;
+  width: 166px;
+  height: 16px;
+  color: #000;
+  font-size: 10px;
+  background: #fff;
+  margin-top: 1px;
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKYAAAAQCAMAAACrxfQtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNS4xIFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDJDRUVDNzdCNUREMTFFMUI3OTU5NzgzODgxQThDRDAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDJDRUVDNzhCNUREMTFFMUI3OTU5NzgzODgxQThDRDAiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0MkNFRUM3NUI1REQxMUUxQjc5NTk3ODM4ODFBOENEMCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0MkNFRUM3NkI1REQxMUUxQjc5NTk3ODM4ODFBOENEMCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PmoXoSYAAAFrUExURf////39/fn5+TQ0NNra2vLy8ufn5/Dw8Pj4+Pv7+9PT097e3vPz85SUlOnp6fz8/Ojo6GNjY+bm5vf3909PT05OTu3t7eTk5NjY2Ozs7DAwMMnJyc3NzeXl5Wtra8zMzNvb2/Hx8fb29u/v78LCwtfX15OTk2dnZ76+vvT09NnZ2c/Pz66urpmZmdHR0WJiYj8/P0hISNXV1XV1dWxsbGFhYd3d3dLS0m9vbwcHB8HBwU1NTcjIyIGBga+vr4WFhV1dXUtLS5WVlYCAgIaGhoKCgr+/v5ubm3x8fDExMVVVVcTExPX19aioqMDAwJ6enuHh4Xh4eOrq6mpqauDg4KGhoaCgoOPj44qKilBQUERERLu7u7i4uLq6upGRkY+Pj7y8vJeXl6KiokZGRsXFxf7+/pKSkpqamu7u7lxcXImJicPDw0FBQRwcHMfHx2ZmZlhYWDIyMjMzM9/f37m5uXBwcM7OzqamplpaWjtFM1IAAAEkSURBVHjazNRHQ4NQEIXRAYMEg0LoxPQY03tiEnvvvffee9efL4Ju2TLf7r27OauBUtafL2tpF+YyE1AL1dOerUAr4gT1HQqZ+Jugx2h+IfidmFJpZ4rbrsokFPIuVaeiqZxcyU3LQ9duR7q0G8XUHHjbenhaZPakL47gktIpRzhRt93Ikf0G09NBkURlBX47WtPBidrtxgum02SyJFG7Mn/2h8P4mGAwbyxmY8z8WAquYmQ+gmQxszvHxrv8PAoYmV3QZzGj4/Lt4Mls8UPAyRyxmMBuVL2Nw8R9NYSQ2QulPyYArwnM+lNxACFzEc6MuxkRmf8b9bl9h/BuJmG3Hg4orEg627nd6J4/AJ9fW+YVmkJcJLYJzQffzMtrC+6aPwIMALePO76p73oWAAAAAElFTkSuQmCC) no-repeat;
+  overflow: hidden;
+  *background: transparent url(../img/search-bg.gif) no-repeat -3px 0;
+}
+.global-search form {
+  margin: -1px 0 0 0;
+  margin: 0 \9;
+  *margin: 2px 0 0 0;
+}
+.global-search input[type=text],
+.global-search input[type=submit] {
+  border: 0;
+  background: transparent;
+  font-size: 10px;
+  padding: 0;
+  color: #53565A;
+  line-height: 16px;
+  margin-top: 3px;
+  *margin-top: 0px;
+}
+.global-search input[type=text] {
+  box-shadow: none;
+  width: 110px;
+  margin-left: 22px;
+  *margin-top: -3px;
+  *float: none;
+}
+.global-search input[type=submit] {
+  margin: 1px 7px 0 0;
+  float: right;
+  *float: none;
+  *margin: -3px 0 0 7px;
+}
+/* CITI GLOBAL HEADER STYLES END */
