@@ -112,6 +112,12 @@
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<dependency>
+    		<groupId>org.springframework.hateoas</groupId>
+    		<artifactId>spring-hateoas</artifactId>
+    		<version>0.17.0.RELEASE</version>
+		</dependency>
+
 
 		<!-- XML/JSON parsing -->
 		<dependency>

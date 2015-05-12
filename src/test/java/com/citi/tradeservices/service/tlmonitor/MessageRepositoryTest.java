@@ -1,16 +1,19 @@
 package com.citi.tradeservices.service.tlmonitor;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
-import static org.hamcrest.collection.IsCollectionWithSize.*;
-import static org.hamcrest.beans.HasPropertyWithValue.*;
 
 import java.util.Calendar;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hamcrest.beans.HasPropertyWithValue;
+import org.hibernate.Hibernate;
+import org.hibernate.ObjectNotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -241,6 +244,30 @@ public class MessageRepositoryTest {
 		assertThat(emptyMessageDetails, notNullValue());
 		assertThat(emptyMessageDetails.isEmpty(), is(equalTo(true)));
 		assertThat(emptyMessageDetails.size(), is(equalTo(0)));
+		
+	}
+	
+	
+	@Test
+	public void testGetMessage() {
+		
+		Message dummy0101 = dao.getMessage("DUMMY_0101");
+		
+		assertThat(dummy0101, notNullValue());
+		assertThat(dummy0101.getRequestId(), allOf( notNullValue(), equalTo("DUMMY_0101") ));
+		
+		Message dummy0202 = dao.getMessage("DUMMY_0202");
+		
+		assertThat(dummy0202, notNullValue());
+		assertThat(dummy0202.getRequestId(), allOf( notNullValue(), equalTo("DUMMY_0202") ));
+		
+	}
+	
+	@Test(expected=ObjectNotFoundException.class)	
+	public void testGetMessageNotFound() { 
+		
+		Message notFound = dao.getMessage("notFound");
+		Hibernate.initialize(notFound);
 		
 	}
 	

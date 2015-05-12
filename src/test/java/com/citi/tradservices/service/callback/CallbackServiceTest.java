@@ -1,16 +1,15 @@
 package com.citi.tradservices.service.callback;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -21,6 +20,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.citi.tradeservices.dao.callback.CallbackDAO;
 import com.citi.tradeservices.domain.callback.Callback;
 import com.citi.tradeservices.domain.callback.CallbackRequest;
+import com.citi.tradeservices.exception.NoDataFoundException;
 import com.citi.tradeservices.service.callback.CallbackService;
 import com.citi.tradeservices.service.callback.CallbackServiceImpl;
 import com.citi.tradeservices.startup.AppConfigTest;
@@ -43,6 +43,12 @@ public class CallbackServiceTest {
 		
 		MockitoAnnotations.initMocks(this);
 		
+		CallbackRequest request = new CallbackRequest("/08049872000194", "/126459");
+		
+		when(dao.getCallback((CallbackRequest) Mockito.anyObject())).thenReturn(CallbackMockBuilder.getEmptyCallback(request));
+		when(dao.getCallback(request)).thenReturn(CallbackMockBuilder.getMockCallback(request));
+		
+		
 	}
 	
 	
@@ -52,16 +58,11 @@ public class CallbackServiceTest {
 		final String cnpj = "/08049872000194";
 		final String account = "/126459";
 		
-		CallbackRequest request = new CallbackRequest();
-		request.setCustomerCNPJ(cnpj);
-		request.setAccount(account);
-		
-		when(dao.getCallback(request)).thenReturn(CallbackMockBuilder.getMockCallback(request));
+		CallbackRequest request = new CallbackRequest(cnpj, account);
 		
 		Callback callback = service.getCallback(request);
 		
 		assertThat(callback, notNullValue());
-		assertThat(callback.getId(), is(equalTo(request.getId())));
 		assertThat(callback.getAccount(), is(equalTo(request.getAccount())));
 		assertThat(callback.getCustomerId(), is(equalTo(request.getCustomerCNPJ())));
 		
@@ -100,6 +101,20 @@ public class CallbackServiceTest {
 		
 		assertThat(callback.getOrderCount(), is(equalTo(10)));
 		assertThat(callback.getLastOrderDate(), is(notNullValue()));
+		
+	}
+	
+	@Test(expected=NoDataFoundException.class)
+	public void testCallbackNotFound() { 
+		
+		final String cnpj = "dummy";
+		final String account = "dummy";
+		
+		CallbackRequest request = new CallbackRequest(cnpj, account);
+		Callback callback = service.getCallback(request);
+		
+		assertThat(callback, is(nullValue()));
+		
 		
 	}
 

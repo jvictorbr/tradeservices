@@ -25,7 +25,7 @@ public class AppConfigTest {
 	
 	@Bean
     public SessionFactory sessionFactory() {
-            LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource());
+           LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource());
            builder.scanPackages("com.citi.tradeservices.domain").addProperties(getHibernateProperties());            
             return builder.buildSessionFactory();
     }	

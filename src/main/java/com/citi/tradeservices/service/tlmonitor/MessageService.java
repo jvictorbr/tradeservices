@@ -9,6 +9,7 @@ import com.citi.tradeservices.domain.tlmonitor.MessageDetails;
 
 public interface MessageService  {
 	
+	Message getMessage(String requestId);
 	List<Message> getMessages(Boolean isError, Date from, Date to);
 	List<MessageDetails> getMessageDetails(String requestId);
 	

@@ -11,6 +11,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.Hibernate;
+import org.hibernate.ObjectNotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.citi.tradeservices.domain.tlmonitor.Message;
 import com.citi.tradeservices.domain.tlmonitor.MessageDetails;
+import com.citi.tradeservices.exception.NoDataFoundException;
 import com.citi.tradeservices.startup.AppConfigTest;
 import com.citi.tradeservices.startup.WebMvcConfig;
 
@@ -153,6 +156,31 @@ public class MessageServiceTest {
 		assertThat(emptyMessageDetails, is(notNullValue()));
 		assertThat(emptyMessageDetails.isEmpty(), is(equalTo(true)));
 		assertThat(emptyMessageDetails.size(), is(equalTo(0)));
+		
+	}
+	
+	@Test
+	public void testGetMessage() { 
+		
+		Message dummy0101 = service.getMessage("DUMMY_0101");
+		assertThat(dummy0101, notNullValue());
+		assertThat(dummy0101.getRequestId(), is(equalTo("DUMMY_0101")));
+		
+		Message dummy0202 = service.getMessage("DUMMY_0202");
+		assertThat(dummy0202, notNullValue());
+		assertThat(dummy0202.getRequestId(), is(equalTo("DUMMY_0202")));
+		
+	}
+	
+	@Test(expected=NoDataFoundException.class)
+	public void testGetMessageNotFound() { 
+		
+		Message notFound = service.getMessage("notFound");
+		try { 
+			Hibernate.initialize(notFound);
+		} catch (ObjectNotFoundException e) { 
+			throw new NoDataFoundException();
+		}
 		
 	}
 

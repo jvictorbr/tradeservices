@@ -37,3 +37,27 @@ function centerModal() {
     var horizontalOffset = ($(window).width() - $dialog.width()) / 2;
     $dialog.css("margin-top", verticalOffset);	    
 }
+
+function getURI(url) { 
+	
+	var contextRoot = "/tlmonitor";
+	var beginIndex = url.indexOf(contextRoot) + contextRoot.length;
+	var uri = url.substring(beginIndex);
+	return uri;
+	
+}
+
+
+
+
+
+Array.prototype.findLink = function(linkName) { 
+	var arr = this;
+	for (i = 0; i < arr.length; i++) { 
+		var link = arr[i];
+		if (link.rel == linkName) { 
+			return link;
+		}
+	}
+	return undefined;
+}

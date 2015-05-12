@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.citi.tradeservices.dao.callback.CallbackDAO;
 import com.citi.tradeservices.domain.callback.Callback;
 import com.citi.tradeservices.domain.callback.CallbackRequest;
+import com.citi.tradeservices.exception.NoDataFoundException;
 
 @Service
 @Transactional(readOnly=true)
@@ -18,7 +19,12 @@ public class CallbackServiceImpl implements CallbackService {
 	@Override
 	public Callback getCallback(CallbackRequest request) {
 	
-		return dao.getCallback(request);
+		Callback callback = dao.getCallback(request);
+		if (callback == null || callback.getOrderCount() == 0) { 
+			throw new NoDataFoundException();
+		}
+		
+		return callback;
 		
 	}
 	

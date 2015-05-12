@@ -1,6 +1,9 @@
 package com.citi.tradeservices.service.tlmonitor;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import javax.transaction.Transactional;
@@ -81,8 +84,7 @@ public class MessageDetailsTest {
 		assertThat(messageDetails02.getMessageContent().contains("<reference_msg_pk>DUMMY_0202</reference_msg_pk>"), is(true));
 		assertThat(messageDetails02.getMessageContent().contains("<error>"), is(true));
 		
-	}
-	
+	}	
 	
 
 }

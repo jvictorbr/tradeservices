@@ -2,15 +2,17 @@ app.controller("messageDetailsController", function($scope, $routeParams, $locat
 	
 	showGlass();
 	
-	tlMonitorService.getMessageDetails($routeParams.requestId)
-		.success(function($response) {
-			$scope.gridOptions.data = $response.messageDetails;
-			hideGlass();
-		}).error(function($response) {
-			showErrorMessage(handleErrorResponse($response));
-			hideGlass();
-		});
-	
+	tlMonitorService.getMessageDetails($routeParams.requestId,
+			function(response) { 
+				$scope.gridOptions.data = response.messageDetails;
+				hideGlass();
+			},
+			function(response) { 
+				showErrorMessage(handleErrorResponse($response));
+				hideGlass();				
+			}
+	);
+
 	$scope.viewXml = function($event, messageDetails) { 
 		
 		$scope.messageXml = $.trim(vkbeautify.xml(messageDetails.messageContent));

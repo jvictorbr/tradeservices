@@ -26,6 +26,11 @@ public class MessageDAOImpl implements MessageDAO {
 	}
 	
 	@Override
+	public Message getMessage(String messageId) {
+		return getHibernateTemplate().load(Message.class, messageId);
+	}
+	
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<MessageDetails> getMessageDetails(String requestId) {
 		
@@ -105,6 +110,8 @@ public class MessageDAOImpl implements MessageDAO {
 	private HibernateTemplate getHibernateTemplate() { 
 		return hibernateTemplate;
 	}
+
+
 
 
 

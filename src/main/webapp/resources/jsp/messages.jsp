@@ -18,16 +18,12 @@
 		<input id="date-picker-to" datepicker ng-model="to" placeholder="To..." type="text" class="date-picker form-control input-block-level minHeight" />
 	</div>
   		
-  	<div class="col-md-1">
-  		<div class="dropdown">
-  			<button combobox combobox-onchange="fetchServerInfo()" ng-model="isError" class="btn btn-default dropdown-toggle" id="statusDropdown" type="button" data-toggle="dropdown" aria-expanded="true">Status<span class="caret"></span></button>
-			<ul class="dropdown-menu" role="menu" aria-labelledby="statusDropdown">
-				<li combobox-value=""><a href="#">All</a></li>
-				<li class="divider"></li>
-	            <li combobox-value="false"><a href="#">Success</a></li>
-	            <li combobox-value="true"><a href="#">Error</a></li>    
-			</ul>	
-        </div> 
+  	<div class="col-md-2">
+  		<select class="form-control" ng-model="isError" id="sel1">
+        	<option value="">All</option>        	
+        	<option value="false">Success</option>
+        	<option value="true">Error</option>
+      	</select>
 	</div>
 	
 	<div class="col-md-1">
@@ -51,7 +47,7 @@
 <script type="text/javascript">
 	
 	$(document).ready(function() {
-		$('.date-picker').datepicker();
+		$('.date-picker').datepicker();		
 		$(".dropdown-menu li a").click(function(){
 			  var selText = $(this).text();
 			  $(this).parents('.dropdown').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');

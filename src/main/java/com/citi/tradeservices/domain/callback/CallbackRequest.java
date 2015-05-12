@@ -47,5 +47,21 @@ public class CallbackRequest implements Serializable {
 		return id;
 		
 	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (other == null) return false;
+		if (!(other instanceof CallbackRequest)) return false;
+		CallbackRequest otherRequest = (CallbackRequest) other;
+		return otherRequest.getCustomerCNPJ().equals(this.getCustomerCNPJ()) 
+				&& otherRequest.getAccount().equals(this.getAccount()); 
+	}
+	
+	@Override
+	public int hashCode() { 
+		int hashCode = this.getCustomerCNPJ().hashCode();
+		hashCode = 29 * hashCode + this.getAccount().hashCode();
+		return hashCode;
+	}
 
 }

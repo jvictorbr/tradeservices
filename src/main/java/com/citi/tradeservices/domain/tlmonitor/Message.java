@@ -12,13 +12,17 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.springframework.hateoas.ResourceSupport;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="TL_002_ERROR_LOG")
 @XmlRootElement
-public class Message implements Serializable {
+@JsonIgnoreProperties(value = { "handler", "hibernateLazyInitializer" })
+public class Message extends ResourceSupport implements Serializable {
 	
 	private static final long serialVersionUID = -5259542838404270586L;
 	

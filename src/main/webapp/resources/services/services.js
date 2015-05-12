@@ -1,50 +1,57 @@
-angular.module('TradeServices.services', [])
+angular.module('TradeServices.services', ['ngResource'])
 
 
-.factory('tlMonitorService', function($http) {
+.factory('tlMonitorService', function($http, $resource) {
 
-    var tlMonitorAPI = {};
+    var tlMonitorAPI = {};    
+    var messagesResource = $resource("/tradeservices/ws/tlmonitor/messages/:id", {}, {
+        	query: { method: "GET", isArray: false }
+    	});
+    var messageDetailsResource = $resource("/tradeservices/ws/tlmonitor/messageDetails/:requestId");
+    
 
-    tlMonitorAPI.getMessages = function(isError, from, to) {
+    tlMonitorAPI.getMessages = function(isError, from, to, success, error) {
     	
-    	var url = "http://localhost:8080/tradeservices/ws/tlmonitor/messages";
-    	var params = {}; 
-		
-		if (isError != undefined && isError != "") {
-			params.isError = isError;
-		}
-		if (from) { 
-			params.from = from;			
-		}
-		if (to) { 
-			params.to = to;			
-		}		
-		
-		if (!$.isEmptyObject(params)) {
-			url = url + '?' + $.param(params);
-		}	
-    	
-		return $http.get(url);
+    	messagesResource.query({isError:isError, from:from, to:to}, 
+    		function(response) { 
+    			success(response);
+    	}, 	function(response) { 
+    			error(response.data);    		 
+    	});
+
     };
     
-    tlMonitorAPI.getMessageDetails = function(requestId) {
-    	var url = "http://localhost:8080/tradeservices/ws/tlmonitor/messageDetails?reqId="+requestId;
-    	return $http.get(url);
+    tlMonitorAPI.getMessageDetails = function(requestId, success, error) {
+    	
+    	messageDetailsResource.get({requestId: requestId},
+    		function(response) {
+    			success(response);
+    	},	function(response) {
+    			error(response.data);
+    	});
+
     };
 
     return tlMonitorAPI;
     
 })
 
-.factory('callbackService', function($http) {
+.factory('callbackService', function($http, $resource) {
 
 	var callbackAPI = {};
+	var callbackResource = $resource("/tradeservices/ws/callback");
 	
-	callbackAPI.getCallback = function(cnpj, account) { 
+	callbackAPI.getCallback = function(cnpj, account, success, error) {
 		
-		var url = "http://localhost:8080/tradeservices/ws/callback?cnpj="+cnpj+"&account="+account;
-		return $http.get(url);
-		
+		callbackResource.get({cnpj: cnpj, account: account},
+				function(successResponse) { 
+					success(successResponse);
+				},
+				function(errorResponse) { 
+					error(errorResponse.data);
+				}		
+		);
+
 	};
 	
 	return callbackAPI;

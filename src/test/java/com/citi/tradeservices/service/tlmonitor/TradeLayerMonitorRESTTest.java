@@ -12,6 +12,8 @@ import javax.transaction.Transactional;
 
 
 
+
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -136,8 +138,7 @@ public class TradeLayerMonitorRESTTest {
 		
 		mockMvc
 			.perform(
-					get("/tlmonitor/messageDetails")
-					.param("reqId", "DUMMY_0101")
+					get("/tlmonitor/messageDetails/DUMMY_0101")
 					.accept(MediaType.APPLICATION_JSON_VALUE)
 			)
 			.andExpect(status().is2xxSuccessful())
@@ -155,8 +156,7 @@ public class TradeLayerMonitorRESTTest {
 		
 		mockMvc
 			.perform(
-					get("/tlmonitor/messageDetails")
-					.param("reqId", "DUMMY_0202")
+					get("/tlmonitor/messageDetails/DUMMY_0202")					
 					.accept(MediaType.APPLICATION_JSON_VALUE)
 			)
 			.andExpect(status().is2xxSuccessful())
@@ -173,14 +173,51 @@ public class TradeLayerMonitorRESTTest {
 	public void testGetNoMessageDetails() throws Exception {
 		mockMvc
 			.perform(
-					get("/tlmonitor/messageDetails")
-					.param("reqId", "NotExistantReqId")
+					get("/tlmonitor/messageDetails/NotExistantReqId")					
 					.accept(MediaType.APPLICATION_JSON_VALUE)
 		)
 		.andExpect(status().isNotFound())
-		.andExpect(jsonPath("$.url", is(equalTo("/tlmonitor/messageDetails"))))
+		.andExpect(jsonPath("$.url", is(equalTo("/tlmonitor/messageDetails/NotExistantReqId"))))
 		.andExpect(jsonPath("$.error", is(equalTo("No records could be found"))))
 		.andDo(MockMvcResultHandlers.print());
+		
+	}
+	
+	
+	@Test
+	public void testGetMessage() throws Exception {
+		
+		mockMvc
+			.perform(
+				get("/tlmonitor/message/DUMMY_0101")
+				.accept(MediaType.APPLICATION_JSON_VALUE)
+			)
+			.andExpect(status().is2xxSuccessful())
+			.andExpect(jsonPath("$.requestId", is(equalTo("DUMMY_0101"))))
+			.andExpect(jsonPath("$.messageCode", is(equalTo(100))))
+			.andExpect(jsonPath("$.dealId", is(equalTo(1001))))
+			.andExpect(jsonPath("$.bacenContractId", is(equalTo(1002))))
+			.andExpect(jsonPath("$.bacenContractYear", is(equalTo(15))))
+			.andExpect(jsonPath("$.fxContractId", is(equalTo(1003))))
+			.andExpect(jsonPath("$.messageDescription", is(equalTo("Sucesso."))))
+			.andExpect(jsonPath("$.messageDate", is(notNullValue())))
+			.andExpect(jsonPath("$.isError", is(equalTo(false))))
+			.andDo(MockMvcResultHandlers.print());
+	
+	}
+	
+	@Test
+	public void testGetMessageNotFound() throws Exception { 
+		
+		mockMvc
+			.perform(
+				get("/tlmonitor/message/notFound")
+				.accept(MediaType.APPLICATION_JSON_VALUE)
+			)
+			.andExpect(status().isNotFound())
+			.andExpect(jsonPath("$.url", is(equalTo("/tlmonitor/message/notFound"))))
+			.andExpect(jsonPath("$.error", is(equalTo("No records could be found"))))
+			.andDo(MockMvcResultHandlers.print());
 		
 	}
 	

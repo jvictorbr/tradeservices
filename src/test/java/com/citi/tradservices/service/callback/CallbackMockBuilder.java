@@ -12,6 +12,18 @@ import com.citi.tradeservices.domain.callback.AbstractCallbackInformation.Interm
 
 public class CallbackMockBuilder {
 	
+	public static Callback getEmptyCallback(CallbackRequest request) { 
+		
+		Callback callback = new Callback();
+		callback.setId(request.getId());
+		callback.setCustomerId(request.getCustomerCNPJ());
+		callback.setAccount(request.getAccount());
+		callback.setOrderCount(0);
+		
+		return callback;
+		
+	}
+	
 	public static Callback getMockCallback(CallbackRequest request) {
 		
 		Callback callback = new Callback();
