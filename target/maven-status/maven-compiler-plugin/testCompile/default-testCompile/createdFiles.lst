@@ -1,8 +1,0 @@
-com\citi\tradeservices\service\tlmonitor\MessageTest.class
-com\citi\tradservices\service\callback\CallbackServiceTest.class
-com\citi\tradeservices\service\tlmonitor\MessageDetailsTest.class
-com\citi\tradeservices\service\tlmonitor\MessageRepositoryTest.class
-com\citi\tradeservices\service\tlmonitor\TradeLayerMonitorRESTTest.class
-com\citi\tradservices\service\callback\CallbackMockTest.class
-com\citi\tradeservices\service\tlmonitor\MessageServiceTest.class
-com\citi\tradservices\service\callback\CallbackMockBuilder.class
